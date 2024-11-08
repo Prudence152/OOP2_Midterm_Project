@@ -1,45 +1,24 @@
 <?php
-
 require_once 'Employee.php';
 
-
-
 class CommissionEmployee extends Employee {
+    private $regularSalary;
+    private $itemSold;
+    private $commissionRate;
 
-    private float $regularSalary;
-
-    private int $itemsSold;
-
-    private float $commissionRate;
-
-
-
-    public function __construct($name, $address, $age, $companyName, $regularSalary, $itemsSold, $commissionRate) {
-
+    public function __construct($name, $address, $age, $companyName, $regularSalary, $itemSold, $commissionRate) {
         parent::__construct($name, $address, $age, $companyName);
-
         $this->regularSalary = $regularSalary;
-
-        $this->itemsSold = $itemsSold;
-
+        $this->itemSold = $itemSold;
         $this->commissionRate = $commissionRate;
-
     }
 
-
-
-    public function earnings(): float {
-
-        return $this->regularSalary + ($this->itemsSold * $this->commissionRate);
-
+    public function earnings() {
+        return $this->regularSalary + ($this->itemSold * $this->commissionRate);
     }
 
-
-
-    public function __toString(): string {
-
-        return parent::__toString() . ", Salary: {$this->regularSalary}, Items Sold: {$this->itemsSold}, Commission Rate: {$this->commissionRate}";
-
+    public function toString() {
+        return parent::toString() . ", Regular Salary: $this->regularSalary, Items Sold: $this->itemSold, Commission Rate: $this->commissionRate";
     }
-
 }
+?>
