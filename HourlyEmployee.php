@@ -2,8 +2,8 @@
 require_once 'Employee.php';
 
 class HourlyEmployee extends Employee {
-    private int $hoursWorked;
-    private float $rate;
+    private $hoursWorked;
+    private $rate;
 
     public function __construct($name, $address, $age, $companyName, $hoursWorked, $rate) {
         parent::__construct($name, $address, $age, $companyName);
@@ -11,12 +11,16 @@ class HourlyEmployee extends Employee {
         $this->rate = $rate;
     }
 
-    public function earnings(): float {
-        $overtimeRate = ($this->hoursWorked > 40) ? 1.5 * $this->rate : $this->rate;
-        return $this->hoursWorked * $overtimeRate;
+    public function earnings() {
+        if ($this->hoursWorked > 40) {
+            return (40 * $this->rate) + (($this->hoursWorked - 40) * $this->rate * 1.5);
+        } else {
+            return $this->hoursWorked * $this->rate;
+        }
     }
 
-    public function __toString(): string {
-        return parent::__toString() . ", Hours Worked: {$this->hoursWorked}, Rate: {$this->rate}";
+    public function toString() {
+        return parent::toString() . ", Hours Worked: $this->hoursWorked, Rate: $this->rate";
     }
 }
+?>
